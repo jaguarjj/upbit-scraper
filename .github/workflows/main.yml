@@ -1,9 +1,32 @@
 name: Upbit Listing Alerter
 
+name: Upbit Listing Alerter
+
 on:
   schedule:
     # Runs every 1 minute
     - cron: '*/1 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4
+
+    - name: Run Python script
+      run: python main.py
 
 jobs:
   run-script:
